@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+
+    <title>Okera Docs</title>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <a  href="index.html"><img src="assets/okera-logo.svg" width=150 style="margin: 10px 0 50px 0;"></a>
+        <h1>How can I help?</h1>
+        <p class="lead">The knowledge base to rule them all.</p>
+      </div>
+    </div><!-- /.container -->
+    
+    <div class ="container">
+      <div class="center-block">
+      <!-- HTML Markup for search -->
+          <div class="aa-input-container" id="aa-input-container">
+              <input type="search" id="aa-search-input" class="aa-input-search center-block" placeholder="Search the docs" name="search" autocomplete="off" />
+              <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+                  <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+              </svg>
+          </div>
+          <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
+          <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+          <script>
+              var client = algoliasearch("Z4XANBDB47", "6f287f2adec130b7ad015e1e09a92a6d")
+              //var docs = client.initIndex('okera-docs');
+              //var zendesk = client.initIndex('zendesk_okera_articles');
+
+              var datasets = [
+                                {
+                                  //displayKey: "actors",
+                                  index: client.initIndex("okera-docs"),
+                                  website:'',
+                                  linkatt: 'url',
+                                },
+                                  {
+                                  //displayKey: "bestbuy",
+                                  index: client.initIndex("zendesk_okera_articles"),
+                                  website:'https://okera.zendesk.com/hc/en-us/articles/',
+                                  linkatt: 'id',
+                                }
+                              ]
+              
+              var length = 10
+
+              autocomplete('#aa-search-input', {}, [
+                  {
+                    source: autocomplete.sources.hits(datasets[0].index, { hitsPerPage: 4 }),
+                    displayKey: 'hierarchy.lvl0',
+                    templates: {
+                      header: '<div class="aa-suggestions-category">Docs</div>',
+                      suggestion: function(suggestion) {
+                        return '<span>' +
+                          suggestion._highlightResult.hierarchy.lvl0.value + '</span>';
+                        if (suggestion.content != '') {
+                          return '<p class="aa-suggestions-preview">' + suggestion.content + '</p>' 
+                        }
+                      }
+                    }
+                  },
+                  {
+                    source: autocomplete.sources.hits(datasets[1].index, { hitsPerPage: 4 }),
+                    displayKey: 'title',
+                    templates: {
+                      header: '<div class="aa-suggestions-category">Zendesk</div>',
+                      suggestion: function(suggestion) {
+                        return '<span>' +
+                          suggestion._highlightResult.title.value + '</span><br><p class="aa-suggestions-preview">' + suggestion.body_safe.substring(0,150) + '</p>';
+                      }
+                    }
+                  }
+              ]).on("autocomplete:selected", function(event, suggestion, dataset) {
+              // 1-indexed dataset
+              var website = datasets[dataset-1].website
+              var linktype = datasets[dataset-1].linkatt
+              //var link2 = suggestion.linktype
+              // do something with:
+              //console.log('website'+linktype)
+              // for example
+              //location.href = website + suggestion.linktype
+              if (dataset == 1) {
+                console.log(suggestion.url)
+                location.href = suggestion.url
+              } else {
+                console.log(website+suggestion.id)
+                location.href = website+suggestion.id
+              }
+            });
+          </script>
+          </div>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
