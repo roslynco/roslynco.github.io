@@ -1,7 +1,7 @@
 body {
   /*padding-top: 50px;*/
   background-color: #22283A;
-  background-image: url("./assets/gradient.png");
+  background-image: url("assets/gradient.png");
 }
 .starter-template {
   padding: 40px 15px;
@@ -64,6 +64,14 @@ body {
 .aa-suggestions-preview {
 	color: #9b9b9b;
 	font-size: 80%;
+}
+
+/* highlight for matching content value*/
+.ais-Highlight {
+  font-weight: 700;
+  font-style: normal;
+  /*background-color: rgb(255, 247, 244);*/
+  color: #FF5b21;
 }
 
 /* More complicated styles*/

@@ -58,7 +58,7 @@
               var datasets = [
                                 {
                                   //displayKey: "actors",
-                                  index: client.initIndex("okera-docs"),
+                                  index: client.initIndex("user_content_production"),
                                   website:'',
                                   linkatt: 'url',
                                 },
@@ -74,27 +74,24 @@
 
               autocomplete('#aa-search-input', {}, [
                   {
-                    source: autocomplete.sources.hits(datasets[0].index, { hitsPerPage: 4 }),
-                    displayKey: 'hierarchy.lvl0',
+                    source: autocomplete.sources.hits(datasets[0].index, { hitsPerPage: 3 }),
+                    displayKey: 'Title',
                     templates: {
                       header: '<div class="aa-suggestions-category">Docs</div>',
                       suggestion: function(suggestion) {
                         return '<span>' +
-                          suggestion._highlightResult.hierarchy.lvl0.value + '</span>';
-                        if (suggestion.content != '') {
-                          return '<p class="aa-suggestions-preview">' + suggestion.content + '</p>' 
-                        }
+                          suggestion._highlightResult.title.value + '</span><br><p class="aa-suggestions-preview">' + suggestion._highlightResult.content.value.substring(0,150) + '</p>';
                       }
                     }
                   },
                   {
-                    source: autocomplete.sources.hits(datasets[1].index, { hitsPerPage: 4 }),
+                    source: autocomplete.sources.hits(datasets[1].index, { hitsPerPage: 3 }),
                     displayKey: 'title',
                     templates: {
                       header: '<div class="aa-suggestions-category">Zendesk</div>',
                       suggestion: function(suggestion) {
                         return '<span>' +
-                          suggestion._highlightResult.title.value + '</span><br><p class="aa-suggestions-preview">' + suggestion.body_safe.substring(0,150) + '</p>';
+                          suggestion._highlightResult.title.value + '</span><br><p class="aa-suggestions-preview">' + suggestion._highlightResult.body_safe.value.substring(0,150) + '</p>';
                       }
                     }
                   }
