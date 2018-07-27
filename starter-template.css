@@ -1,94 +1,141 @@
 body {
-  /*padding-top: 50px;*/
-  background-color: #22283A;
-  background-image: url("assets/gradient.png");
+    /*padding-top: 50px;*/
+    background-color: #22283A;
+    background-image: url("assets/gradient.png");
 }
+
 .starter-template {
-  padding: 40px 15px;
-  text-align: center;
-  color: white;
+    padding: 40px 15px;
+    text-align: center;
+    color: white;
 }
 
 /* TK CSS for Algolia Autocomplete Tutorial */
+
 .aa-input-container {
-  display: inline-block;
-  position: relative;
-  float: none;
-  margin: 0 0 0 200px; 
+    display: inline-block;
+    position: relative;
+    float: none;
+    margin: 0 0 0 200px;
 }
 
 .aa-input-search {
-  width: 700px;
-  border: 1px solid rgba(228, 228, 228, 0.6);
-  padding: 12px 28px 12px 12px;
-  box-sizing: border-box;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; 
+    width: 700px;
+    border: 1px solid rgba(228, 228, 228, 0.6);
+    padding: 12px 28px 12px 12px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-.aa-input-search::-webkit-search-decoration, .aa-input-search::-webkit-search-cancel-button, .aa-input-search::-webkit-search-results-button, .aa-input-search::-webkit-search-results-decoration {
-    display: none; }
+.aa-input-search::-webkit-search-decoration,
+.aa-input-search::-webkit-search-cancel-button,
+.aa-input-search::-webkit-search-results-button,
+.aa-input-search::-webkit-search-results-decoration {
+    display: none;
+}
+
 .aa-input-icon {
-  height: 16px;
-  width: 16px;
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  fill: #e4e4e4; }
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    fill: #e4e4e4;
+}
+
 .aa-dropdown-menu {
-  background-color: #fff;
-  border: 1px solid rgba(228, 228, 228, 0.6);
-  min-width: 700px;
-  margin-top: 10px;
-  box-sizing: border-box;
-  padding: 12px 28px 12px 12px; 
+    background-color: #fff;
+    /*border: 1px solid rgba(228, 228, 228, 0.6);*/
+    min-width: 700px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    /*padding: 12px 28px 12px 12px;*/
 }
+
 .aa-suggestion {
-  padding: 12px;
-  cursor: pointer;
+    padding: 12px 10px 0px 12px;
+    cursor: pointer;
 }
-.aa-suggestion + .aa-suggestion {
+
+.aa-suggestion+.aa-suggestion {
     border-top: 1px solid rgba(228, 228, 228, 0.6);
 }
-.aa-suggestion:hover, .aa-suggestion.aa-cursor {
-    background-color: rgba(241, 241, 241, 0.35); }
+
+.aa-suggestion:hover,
+.aa-suggestion.aa-cursor {
+    background-color: rgba(241, 241, 241, 0.35);
+}
 
 .aa-suggestions-category {
-	color: #22283A;
-	font-weight: 700;
+    color: #22283A;
+    font-weight: 700;
+    background-color: #f3f3f3;
+    padding: 0 0 2px 10px;
+}
+
+.aa-suggestions-okera-heading {
+  font-weight: 600;
+}
+.aa-suggestions-subheading {
+    color: #2b72bb;
+    font-size: 0.9em;
 }
 
 .aa-suggestions-preview {
-	color: #9b9b9b;
-	font-size: 80%;
+    color: #9b9b9b;
+    font-size: 80%;
 }
 
 /* highlight for matching content value*/
+
 .ais-Highlight {
-  font-weight: 700;
-  font-style: normal;
-  /*background-color: rgb(255, 247, 244);*/
-  color: #FF5b21;
+    font-weight: 700;
+    font-style: normal;
+    /*background-color: rgb(255, 247, 244);*/
+    color: #4a4a4a;
 }
 
 /* More complicated styles*/
-  .aa-suggestion:hover, .aa-suggestion.aa-cursor {
-    background-color: rgb(255, 247, 244); }
-  .aa-suggestion > span:first-child {
-    color: #333; }
-  .aa-suggestion > span:last-child {
-    text-transform: uppercase;
-    color: #a9a9a9; }
 
-.aa-suggestion > span:first-child em, .aa-suggestion > span:last-child em {
-  font-weight: 700;
-  font-style: normal;
-  background-color: rgb(255, 247, 244);
-  padding: 2px 0 2px 2px; 
-  color: #FF5b21;
+.aa-suggestion:hover,
+.aa-suggestion.aa-cursor {
+    background-color: rgb(255, 247, 244);
 }
 
+.aa-suggestion>span:first-child {
+    color: #333;
+}
 
+.aa-suggestion>span:last-child {
+    text-transform: uppercase;
+    color: #a9a9a9;
+}
+
+/* Styling for matching words*/
+
+.aa-suggestion>span:first-child em,
+.aa-suggestion>span:last-child em {
+    font-weight: 700;
+    font-style: normal;
+    background-color: rgb(255, 247, 244);
+    padding: 2px 0 2px 2px;
+    color: #FF5b21;
+}
+
+/* Algolia Logo styling*/
+
+.branding {
+    font-size: 0.7em;
+    margin: 0.5em 0.2em;
+    float: right;
+    color: grey;
+}
+
+.branding img {
+    height: 0.8em;
+    margin-bottom: - 0.3em;
+}
