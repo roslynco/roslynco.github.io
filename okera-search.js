@@ -1,27 +1,23 @@
 var client = algoliasearch("Z4XANBDB47", "6f287f2adec130b7ad015e1e09a92a6d")
-//var docs = client.initIndex('okera-docs');
-//var zendesk = client.initIndex('zendesk_okera_articles');
 
 var datasets = [
                 {
-                    //displayKey: "actors",
                     index: client.initIndex("user_content_production"),
                     website:'https://docs.okera.com',
                     linkatt: 'url',
                 },
                     {
-                    //displayKey: "bestbuy",
                     index: client.initIndex("zendesk_okera_articles"),
                     website:'https://okera.zendesk.com/hc/en-us/articles/',
                     linkatt: 'id',
                 }
                 ]
 
-var length = 10
-
 autocomplete('#aa-search-input', {
+    debug: true,
     templates: {
-      footer: '<div class="branding">search by <img src="https://www.algolia.com/static_assets/images/press/downloads/algolia-logo-light.svg" /></div>',
+      //add search by algolia logo
+        footer: '<div class="branding">Search by <img src="https://www.algolia.com/static_assets/images/press/downloads/algolia-logo-light.svg" /></div>',
     }
 },[
     {
@@ -49,7 +45,7 @@ autocomplete('#aa-search-input', {
         header: '<div class="aa-suggestions-category">Zendesk Knowledgebase</div>',
         suggestion: function(suggestion) {
         return '<span class="aa-suggestions-okera-heading">' +
-            suggestion._highlightResult.title.value + '</span><br><p class="aa-suggestions-preview">' + suggestion._highlightResult.body_safe.value.substring(0,150) + '</p>';
+            suggestion._highlightResult.title.value + '</span><br><p class="aa-suggestions-preview">' + suggestion._snippetResult.body_safe.value + '</p>';
         }
     }
     }
@@ -57,11 +53,7 @@ autocomplete('#aa-search-input', {
     // 1-indexed dataset
     var website = datasets[dataset-1].website
     var linktype = datasets[dataset-1].linkatt
-    //var link2 = suggestion.linktype
-    // do something with:
-    //console.log('website'+linktype)
-    // for example
-    //location.href = website + suggestion.linktype
+    //adds the correct url to the search result 
     if (dataset == 1) {
         console.log(suggestion.url)
         location.href = website+suggestion.url+'#'+suggestion.anchor
